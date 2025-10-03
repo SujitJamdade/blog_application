@@ -1,39 +1,24 @@
 package com.sujit.blog.payloads;
 
-import jakarta.persistence.Column;
+import com.sujit.blog.entities.Category;
+import com.sujit.blog.entities.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostDTO {
 
     private String title;
     private String content;
+    private String imageName;
+    private Date addedDate;
 
-    // Constructor
+    private CategoryDto category;
+    private UserDTO user;
 
-    public PostDTO() {
-    }
-
-    public PostDTO(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
-    // Getter & Setter
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

@@ -9,31 +9,25 @@ import com.sujit.blog.repositories.CategoryRepo;
 import com.sujit.blog.repositories.PostRepo;
 import com.sujit.blog.repositories.UserRepo;
 import com.sujit.blog.services.PostService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
-    private PostRepo postRepo;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private CategoryRepo categoryRepo;
+    private final PostRepo postRepo;
+    private final ModelMapper modelMapper;
+    private final UserRepo userRepo;
+    private final CategoryRepo categoryRepo;
 
     // create
     @Override
-    public Post createPost(PostDTO postDTO, Integer userId, Integer categoryId){
+    public PostDTO createPost(PostDTO postDTO, Integer userId, Integer categoryId){
 
         // Get User
         User user = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "UserId", userId));
@@ -41,17 +35,20 @@ public class PostServiceImpl implements PostService {
         // Get Category
         Category category = categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
-        Post post = dtoToEntity(postDTO);
+        Post post = modelMapper.map(postDTO, Post.class);
         post.setImageName("default.png");
         post.setAddedDate(new Date());
         post.setUser(user);
         post.setCategory(category);
-        return postRepo.save(post);
+
+        Post savedPost = postRepo.save(post);
+
+        return modelMapper.map(savedPost, PostDTO.class);
     }
 
     // update
     @Override
-    public Post updatePost(PostDTO postDTO, Integer postId){
+    public PostDTO updatePost(PostDTO postDTO, Integer postId){
         return null;
     }
 

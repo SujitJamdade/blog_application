@@ -1,9 +1,14 @@
 package com.sujit.blog.payloads;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryDto {
 
     private Integer categoryId;
@@ -16,39 +21,4 @@ public class CategoryDto {
     @Size(min = 10,message = "Description should be min of 10 character !!")
     private String categoryDescription;
 
-    // Constructor
-    public CategoryDto() {
-    }
-
-    public CategoryDto(Integer categoryId, String categoryTitle, String categoryDescription) {
-        this.categoryId = categoryId;
-        this.categoryTitle = categoryTitle;
-        this.categoryDescription = categoryDescription;
-    }
-
-    // Getter & Setter
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryTitle() {
-        return categoryTitle;
-    }
-
-    public void setCategoryTitle(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
 }

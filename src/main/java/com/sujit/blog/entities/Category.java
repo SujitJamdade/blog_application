@@ -1,10 +1,16 @@
 package com.sujit.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -19,45 +25,8 @@ public class Category {
     @Column(name = "description")
     private String categoryDescription;
 
-    //
+    // One Category can have multiple posts
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-
-    // Constructor
-
-    public Category() {
-    }
-
-    public Category(Integer categoryId, String categoryTitle, String categoryDescription) {
-        this.categoryId = categoryId;
-        this.categoryTitle = categoryTitle;
-        this.categoryDescription = categoryDescription;
-    }
-
-    // Getter & Setter
-
-    public String getCategoryTitle() {
-        return categoryTitle;
-    }
-
-    public void setCategoryTitle(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryDescription() {
-        return categoryDescription;
-    }
-
-    public void setCategoryDescription(String categoryDescription) {
-        this.categoryDescription = categoryDescription;
-    }
 }

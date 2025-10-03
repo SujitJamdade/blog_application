@@ -8,10 +8,10 @@ import java.util.List;
 public interface PostService {
 
     // create
-    Post createPost(PostDTO postDTO, Integer userId, Integer categoryId);
+    PostDTO createPost(PostDTO postDTO, Integer userId, Integer categoryId);
 
     // update
-    Post updatePost(PostDTO postDTO, Integer postId);
+    PostDTO updatePost(PostDTO postDTO, Integer postId);
 
     // delete
     void deletePost(Integer postId);
@@ -30,9 +30,4 @@ public interface PostService {
 
     // search post by keyword
     List<Post> searchPosts(String keyword);
-
-
-
-
-
 }
