@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -70,32 +71,34 @@ public class PostServiceImpl implements PostService {
         return null;
     }
 
-    // get all post by user
-    @Override
-    public List<Post> getPostByUser(Integer postId){
-        return null;
-    }
 
     // get all posts by category
     @Override
-    public List<Post> getPostByCategory(Integer categoryId){
-        return null;
+    public List<PostDTO> getPostByCategory(Integer categoryId){
+
+        Category category = categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
+        List<Post> posts = postRepo.findByCategory(category);
+
+        return posts.stream()
+                .map((post) -> modelMapper.map(post, PostDTO.class)).collect(Collectors.toList());
+    }
+
+    // get all post by user
+    @Override
+    public List<PostDTO> getPostByUser(Integer userId){
+
+        User user = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userId));
+
+        List<Post> posts = postRepo.findByUser(user);
+
+        return posts.stream()
+                .map((post) -> modelMapper.map(post, PostDTO.class)).toList();
     }
 
     // search post by keyword
     @Override
     public List<Post> searchPosts(String keyword){
         return null;
-    }
-
-    // dto to Entity
-    public Post dtoToEntity(PostDTO dto){
-        return modelMapper.map(dto, Post.class);
-    }
-
-    // Entity to dto
-    public PostDTO entityToDto(Post post){
-        return modelMapper.map(post, PostDTO.class);
     }
 
 }

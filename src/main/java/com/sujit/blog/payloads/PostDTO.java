@@ -1,7 +1,6 @@
 package com.sujit.blog.payloads;
 
-import com.sujit.blog.entities.Category;
-import com.sujit.blog.entities.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
