@@ -1,7 +1,7 @@
 package com.sujit.blog.payloads;
 
-import com.sujit.blog.entities.Category;
-import com.sujit.blog.entities.User;
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,12 @@ import java.util.Date;
 @NoArgsConstructor
 public class PostDTO {
 
+    private Integer postId;
+
+    @NotEmpty(message = "Title is mandatory")
     private String title;
+
+    @NotEmpty(message = "Content is mandatory")
     private String content;
     private String imageName;
     private Date addedDate;

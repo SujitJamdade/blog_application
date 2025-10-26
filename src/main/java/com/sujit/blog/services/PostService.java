@@ -2,6 +2,7 @@ package com.sujit.blog.services;
 
 import com.sujit.blog.entities.Post;
 import com.sujit.blog.payloads.PostDTO;
+import com.sujit.blog.payloads.PostResponse;
 
 import java.util.List;
 
@@ -17,17 +18,17 @@ public interface PostService {
     void deletePost(Integer postId);
 
     // get all posts
-    List<Post> getAllPost();
+    PostResponse getAllPost(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
 
     // get single post
-    Post getPostById(Integer postId);
+    PostDTO getPostById(Integer postId);
 
     // get all post by user
-    List<Post> getPostByUser(Integer postId);
+    List<PostDTO> getPostByUser(Integer userId);
 
     // get all posts by category
-    List<Post> getPostByCategory(Integer categoryId);
+    List<PostDTO> getPostByCategory(Integer categoryId);
 
     // search post by keyword
-    List<Post> searchPosts(String keyword);
+    List<PostDTO> searchPosts(String keyword);
 }
