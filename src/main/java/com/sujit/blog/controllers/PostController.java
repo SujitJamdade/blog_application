@@ -3,6 +3,7 @@ package com.sujit.blog.controllers;
 import com.sujit.blog.entities.Post;
 import com.sujit.blog.payloads.ApiResponse;
 import com.sujit.blog.payloads.PostDTO;
+import com.sujit.blog.payloads.PostResponse;
 import com.sujit.blog.services.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -51,11 +52,11 @@ public class PostController {
 
     // get all posts
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDTO>> getAllPost(
+    public ResponseEntity<PostResponse> getAllPost(
             @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize){
-        List<PostDTO> allPost = postService.getAllPost(pageNumber,pageSize);
-        return new ResponseEntity<>(allPost, HttpStatus.OK);
+        PostResponse postResponse = postService.getAllPost(pageNumber,pageSize);
+        return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
     }
 
     // get post by postId
